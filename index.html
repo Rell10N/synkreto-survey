@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Предложить Идею для Синкретосферы</title>
+    <style>
+        /* === ДИЗАЙН СИНКРЕТОСФЕРЫ === */
+        :root {
+            --bg-primary: #0a0118;
+            --bg-secondary: #1a0b2e;
+            --bg-tertiary: #2d1b4e;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #c084fc;
+            --text-primary: #e0e7ff;
+            --text-secondary: #a5b4fc;
+            --border: #3d2b5e;
+            --shadow: rgba(139, 92, 246, 0.4);
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-card {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header-card h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--accent-secondary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .input-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: -0.3rem;
+            margin-bottom: 0.6rem;
+            font-style: italic;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            box-sizing: border-box; 
+        }
+
+        /* Выпадающие списки */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+            padding-right: 2.5rem;
+            cursor: pointer;
+        }
+
+        select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Ползунки (Качество и Редкость) */
+        .slider-box {
+            background: var(--bg-tertiary);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-top: 0.5rem;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            margin: 15px 0;
+            padding: 0;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--accent-secondary);
+        }
+
+        .slider-desc {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Стилизация чекбоксов структуры */
+        .blocks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .block-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-tertiary);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .block-item:hover {
+            border-color: var(--accent-primary);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .block-item.recommended {
+            border: 1px dashed var(--accent-secondary);
+            position: relative;
+        }
+
+        .block-item.recommended::after {
+            content: "★";
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            color: var(--accent-secondary);
+            font-size: 0.75rem;
+        }
+
+        .block-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: var(--accent-primary);
+            cursor: pointer;
+        }
+
+        .block-item span {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Кнопки */
+        .actions-area {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .actions-area {
+                flex-direction: column;
+            }
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-sizing: border-box;
+        }
+
+        .btn-submit {
+            background: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .btn-copy {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .btn-copy:hover {
+            background: var(--accent-primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .btn-copy.copied {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        /* Скроллбары */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-card">
+        <h1>⚗️ Предложить идею для генератора</h1>
+        <p>Заполните форму ниже, чтобы поделиться своей задумкой. Вы можете отправить форму мне на почту или просто скопировать готовый текстовый шаблон для отправки в чат!</p>
+    </div>
+
+    <!-- ФОРМА ОТПРАВКИ -->
+    <!-- ЗАМЕНИТЕ ВАШ_EMAIL@example.com НА ВАШУ РЕАЛЬНУЮ ПОЧТУ -->
+    <form action="https://formsubmit.co/synkretossurvey@gmail.com" method="POST" id="surveyForm">
+        
+        <!-- Скрытые настройки для FormSubmit (чтобы страница после отправки выглядела красиво) -->
+        <input type="hidden" name="_subject" value="Новая идея для Генератора Синкретосферы!">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+
+        <div class="card">
+            <!-- Автор идеи -->
+            <div class="form-group">
+                <label class="input-label" for="authorName">👤 Ваше имя или никнейм</label>
+                <input type="text" id="authorName" name="Автор_Идеи" placeholder="Например: Wanderer_42" required autocomplete="off">
+            </div>
+
+            <!-- 1. Компоненты -->
+            <div class="form-group">
+                <label class="input-label" for="components">🧪 1. Компоненты (Основа)</label>
+                <div class="input-desc">Введите через запятую ключевые слова, из которых будет создан объект</div>
+                <input type="text" id="components" name="1_Компоненты" placeholder="Например: Тень, Ртуть, Хрусталь, Палка" required autocomplete="off">
+            </div>
+
+            <!-- 2 & 3. Тип и Подтип (Связанные списки) -->
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="input-label" for="objectType">📦 2. Тип объекта</label>
+                    <select id="objectType" name="2_Тип_Объекта" onchange="updateSubtypes()">
+                        <!-- Опции генерируются автоматически из JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="input-label" for="subtypeSelector">🔸 3. Уточнение (Подтип)</label>
+                    <select id="subtypeSelector" name="3_Подтип">
+                        <!-- Опции обновляются автоматически -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- 4 & 5. Язык и Стиль названия -->
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="input-label" for="language">🌐 4. Язык названия</label>
+                    <select id="language" name="4_Язык_Названия">
+                        <option value="Латынь" selected>Латынь</option>
+                        <option value="Русский">Русский</option>
+                        <option value="Английский">Английский</option>
+                        <option value="Немецкий">Немецкий</option>
+                        <option value="Польский">Польский</option>
+                        <option value="Украинский">Украинский</option>
+                        <option value="Японский">Японский</option>
+                        <option value="Китайский">Китайский</option>
+                        <option value="Древнегреческий">Древнегреческий</option>
+                        <option value="Скандинавский">Скандинавский</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="input-label" for="namingStyle">🔤 5. Стиль имени</label>
+                    <select id="namingStyle" name="5_Стиль_Имени">
+                        <option value="blend" selected>🌪️ Полное слияние (Rosrox)</option>
+                        <option value="compound">🔗 Составное (Rostrum-Ferox)</option>
+                        <option value="separate">📄 Раздельное (Rostrum Ferox)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 6 & 7. Кол-во слов в имени и Стиль описания -->
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="input-label" for="wordCount">📏 6. Кол-во слов в имени</label>
+                    <select id="wordCount" name="6_Колво_Слов_в_Имени">
+                        <option value="Автоматически" selected>⚡ Автоматически (ИИ решит сам)</option>
+                        <option value="1">1 слово</option>
+                        <option value="2">2 слова</option>
+                        <option value="3">3 слова</option>
+                        <option value="4">4 слова</option>
+                        <option value="5">5 слов</option>
+                        <option value="6">6 слов</option>
+                        <option value="7">7 слов</option>
+                        <option value="8">8 слов</option>
+                        <option value="9">9 слов</option>
+                        <option value="10">10 слов</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="input-label" for="textStyle">🎭 7. Стиль описания</label>
+                    <select id="textStyle" name="7_Стиль_Описания">
+                        <option value="literary" selected>📖 Художественный (Фэнтези)</option>
+                        <option value="scientific">🔬 Научный (Академический)</option>
+                        <option value="horror">🩸 Хоррор (Мрачный)</option>
+                        <option value="mythic">🏛️ Мифический (Легенды)</option>
+                        <option value="technical">⚙️ Технический (Документация)</option>
+                        <option value="game">🎮 Игровой (Геймдизайн)</option>
+                        <option value="simple">💬 Простой (Лаконичный)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 8. Качество (Состояние) -->
+            <div class="form-group">
+                <div class="slider-box">
+                    <div class="slider-header">
+                        <label style="color: var(--text-primary);">🛠 8. Качество (Состояние)</label>
+                        <span id="qualityLabel" style="color: var(--text-secondary);">5 - Стандартное</span>
+                    </div>
+                    <input type="range" id="quality" name="8_Качество_Значение" min="1" max="10" value="5" oninput="updateQuality(this.value)">
+                    <!-- Скрытые текстовые поля для отправки красивого значения на почту -->
+                    <input type="hidden" id="qualityName" name="8_Качество_Название" value="Стандартное">
+                    <div id="qualityDesc" class="slider-desc">Базовая норма. Скучный реализм.</div>
+                </div>
+            </div>
+
+            <!-- 9. Редкость (Сила) -->
+            <div class="form-group">
+                <div class="slider-box">
+                    <div class="slider-header">
+                        <label style="color: var(--text-primary);">💎 9. Редкость (Сила)</label>
+                        <span id="rarityLabel" style="color: var(--text-secondary);">2 - Типичная</span>
+                    </div>
+                    <input type="range" id="rarity" name="9_Редкость_Значение" min="1" max="10" value="2" oninput="updateRarity(this.value)">
+                    <!-- Скрытые текстовые поля для отправки красивого значения на почту -->
+                    <input type="hidden" id="rarityName" name="9_Редкость_Название" value="Типичная">
+                    <div id="rarityDesc" class="slider-desc">Знакомая всем, фон реальности.</div>
+                </div>
+            </div>
+
+            <!-- 10. Структура (Выбор блоков) -->
+            <div class="form-group">
+                <label class="input-label">📋 10. Структура (Какие блоки нужны?)</label>
+                <div class="input-desc">Укажите, что именно генератор должен расписать. Отмеченные ★ блоки — крайне рекомендуются!</div>
+                
+                <div class="blocks-container">
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Состав" value="Да" checked><span>1. Состав</span></label></div>
+                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Название" value="Да" checked><span>2. Название ★</span></label></div>
+                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Описание" value="Да" checked><span>3. Описание ★</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Свойства" value="Да" checked><span>4. Свойства</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Локация" value="Да" checked><span>5. Локация</span></label></div>
+                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Внешний_Вид" value="Да" checked><span>6. Внешность ★</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Параметры" value="Да" checked><span>7. Параметры</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Плюс_Минус" value="Да" checked><span>8. Плюс/Минус</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Лор" value="Да" checked><span>9. Лор</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Акустика" value="Да" checked><span>10. Акустика</span></label></div>
+                </div>
+            </div>
+
+            <!-- 11. Свои пожелания -->
+            <div class="form-group" style="margin-bottom: 0;">
+                <label class="input-label" for="wishes">💡 11. Ваши пожелания и предпочтения</label>
+                <div class="input-desc">Здесь можно указать контекст, привязку к фракции или другие важные детали</div>
+                <textarea id="wishes" name="11_Пожелания_и_Контекст" placeholder="Например: 'Хочу, чтобы этот предмет принадлежал древней гильдии' или 'Сделайте акцент на эффекте ртути'..."></textarea>
+            </div>
+        </div>
+
+        <!-- КНОПКИ ДЕЙСТВИЯ -->
+        <div class="actions-area">
+            <button type="submit" class="btn btn-submit">📬 Отправить на почту</button>
+            <button type="button" class="btn btn-copy" onclick="copyToClipboard()" id="copyBtn">📋 Скопировать шаблон</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // === ДАННЫЕ СИНХРОНИЗИРОВАННЫЕ С ВАШИМ ГЕНЕРАТОРОМ ===
+    const OBJECT_TYPES = {
+        weapon: { icon: '⚔️', name: 'Оружие' },
+        artifact: { icon: '💎', name: 'Артефакт' },
+        creature: { icon: '🐉', name: 'Существо' },
+        location: { icon: '🗺️', name: 'Локация' },
+        equipment: { icon: '🛡️', name: 'Экипировка' },
+        drink: { icon: '🍷', name: 'Напиток' },
+        food: { icon: '🍖', name: 'Еда' },
+        mechanism: { icon: '⚙️', name: 'Механизм/Гаджет' },
+        jewel: { icon: '💍', name: 'Драгоценность' },
+        fossil: { icon: '🦴', name: 'Ископаемое' },
+        transport: { icon: '🚗', name: 'Транспорт' },
+        plant: { icon: '🌿', name: 'Растение' },
+        building: { icon: '🏛️', name: 'Здание' },
+        anomaly: { icon: '🌀', name: 'Аномалия/Явление' },
+        ability: { icon: '✨', name: 'Способность' },
+        material: { icon: '🧱', name: 'Материал/Ресурс' },
+        tool: { icon: '🔧', name: 'Инструмент' },
+        substance: { icon: '💧', name: 'Субстанция' },
+        persona: { icon: '👤', name: 'Личность' }
+    };
+
+    const SUBTYPES = {
+        weapon:     ["Отсутствует", "Стандартное", "Случайное", "Ближний бой", "Дальний бой", "Магическое", "Щит / Защитное", "Метательное", "Боеприпас", "Осадное / Тяжелое", "Ловушка / Мина"],
+        equipment:  ["Отсутствует", "Стандартное", "Случайное", "Шлем", "Нагрудник", "Поножи", "Перчатки", "Обувь", "На спину", "Аксессуар", "Пояс", "Полный Сет Брони"],
+        creature:   ["Отсутствует", "Стандартное", "Случайное", "Дикий Зверь", "Монстр", "Фамильяр", "Нежить", "Дух / Призрак", "Элементаль", "Киборг-зверь / Биомеханизм", "Насекомое / Рой"],
+        persona:    ["Отсутствует", "Стандартное", "Случайное", "Воин / Солдат", "Маг", "Ученый", "Торговец", "Мирный житель", "Аристократ / Лидер", "Преступник / Вор", "Наемник", "Ремесленник", "Странник / Путешественник", "Разумный Нелюдь"],
+        transport:  ["Отсутствует", "Стандартное", "Случайное", "Наземный", "Летающий", "Водный", "Подводный", "Космический / Эфирный", "Боевой Мех", "Живой транспорт"],
+        mechanism:  ["Отсутствует", "Стандартное", "Случайное", "Механический", "Электронный / Цифровой", "Магический / Рунный", "Паровой / Гидравлический", "Простой узел", "Автономный бот"],
+        drink:      ["Отсутствует", "Стандартное", "Случайное", "Напиток", "Зелье", "Лекарство", "Яд / Токсин", "Алкоголь", "Энергетик / Стимулятор"],
+        food:       ["Отсутствует", "Стандартное", "Случайное", "Блюдо", "Ингредиент", "Сырое", "Консервы / Паек", "Десерт / Сладость", "Магическая еда"],
+        substance:  ["Отсутствует", "Стандартное", "Случайное", "Жидкая", "Газообразная", "Твердая / Порошок", "Вязкая / Гель", "Энергетическая", "Магический эфир"],
+        material:   ["Отсутствует", "Стандартное", "Случайное", "Органический", "Металлический", "Минеральный / Камень", "Синтетический / Пластик", "Ткань / Кожа", "Магический сплав"],
+        fossil:     ["Отсутствует", "Стандартное", "Случайное", "Органическое", "Минеральное", "Древний артефакт", "Техногенный мусор", "Магический кристалл"],
+        plant:      ["Отсутствует", "Стандартное", "Случайное", "Лекарственное", "Ядовитое", "Хищное", "Магическое", "Декоративное", "Дерево / Гигантское", "Гриб / Плесень"],
+        building:   ["Отсутствует", "Стандартное", "Случайное", "Жилое", "Военное / Форт", "Производство / Завод", "Храм / Святилище", "Торговое / Лавка", "Руины / Заброшенное", "Магическая Башня"],
+        location:   ["Отсутствует", "Стандартное", "Случайное", "Город / Поселение", "Дикая природа", "Подземелье / Пещера", "Аномальная зона", "Водоем", "Остров", "Руины", "Необычная"],
+        artifact:   ["Отсутствует", "Стандартное", "Случайное", "Активный", "Пассивный", "Проклятый предмет", "Древняя реликвия", "Техно-артефакт"],
+        jewel:      ["Отсутствует", "Стандартное", "Случайное", "Драгоценный камень", "Энергетический кристалл", "Оберег / Амулет", "Редкий ресурс", "Ювелирное изделие"],
+        ability:    ["Отсутствует", "Стандартное", "Случайное", "Активная", "Пассивная", "Заклинание", "Боевой навык", "Ментальная / Псионическая", "Врожденный талант"],
+        anomaly:    ["Отсутствует", "Стандартное", "Случайное", "Пространственная", "Временная", "Стихийная", "Биологическая", "Техногенная", "Психическая"],
+        tool:       ["Отсутствует", "Стандартное", "Случайное", "Ремесленное", "Научное / Измерительное", "Бытовое", "Для выживания", "Музыкальное", "Медицинское"],
+        default:    ["Отсутствует", "Стандартное", "Случайное"]
+    };
+
+    const QUALITY_LEVELS = {
+        1:  { name: 'Ничтожное',    desc: 'Распад и мусор. Едва держится кучи.', color: '#636363' },
+        2:  { name: 'Дефектное',    desc: 'Критически поврежденное.',           color: '#736345' },
+        3:  { name: 'Примитивное',  desc: 'Грубая работа, кустарщина.',          color: '#8C9E5E' },
+        4:  { name: 'Обыденное',    desc: 'Ширпотреб, поношенное.',              color: '#87b7ba' },
+        5:  { name: 'Стандартное',  desc: 'Базовая норма. Скучный реализм.',     color: '#4FC3F7' },
+        6:  { name: 'Добротное',    desc: 'Надежное, чистая работа.',            color: '#2ECC71' },
+        7:  { name: 'Продвинутое',  desc: 'Эстетичное, улучшенное.',             color: '#82cc00' },
+        8:  { name: 'Избранное',    desc: 'Высококлассное, элитное.',            color: '#FB8C00' },
+        9:  { name: 'Выдающееся',   desc: 'Идеальный баланс.',                   color: '#E53935' },
+        10: { name: 'Безупречное',  desc: 'Пик совершенства.',                   color: '#FFD700' }
+    };
+
+    const RARITY_LEVELS = {
+        1:  { name: 'Скудная',      desc: 'Почти пустая оболочка.',              color: '#78716c' },
+        2:  { name: 'Типичная',     desc: 'Знакомая всем, фон реальности.',      color: '#a8a29e' },
+        3:  { name: 'Нетипичная',   desc: 'Редкий экземпляр со странностью.',    color: '#22c55e' },
+        4:  { name: 'Редкая',       desc: 'Ценная, трудно найти.',               color: '#0ea5e9' },
+        5:  { name: 'Эпическая',    desc: 'Мощная аура, героический характер.',  color: '#8b5cf6' },
+        6:  { name: 'Мифическая',   desc: 'Таинственная, нарушает физику.',      color: '#d946ef' },
+        7:  { name: 'Колоссальная', desc: 'Глобальное влияние.',                 color: '#f43f5e' },
+        8:  { name: 'Легендарная',  desc: 'Единичная, овеяна мифами.',           color: '#fbbf24' },
+        9:  { name: 'Первозданная', desc: 'Воплощение чистой стихии.',           color: '#f59e0b' },
+        10: { name: 'Абсолютная',   desc: 'Божественная, меняет реальность.',    color: '#ef4444' }
+    };
+
+    // === ИНИЦИАЛИЗАЦИЯ И ОБРАБОТЧИКИ ===
+    document.addEventListener('DOMContentLoaded', () => {
+        // Заполняем типы объектов
+        const typeSelect = document.getElementById('objectType');
+        for (let key in OBJECT_TYPES) {
+            let opt = document.createElement('option');
+            opt.value = key;
+            opt.innerHTML = OBJECT_TYPES[key].icon + ' ' + OBJECT_TYPES[key].name;
+            typeSelect.appendChild(opt);
+        }
+        
+        // Обновляем подтипы и значения ползунков по умолчанию
+        updateSubtypes();
+        updateQuality(5);
+        updateRarity(2);
+    });
+
+    // Функция обновления списка подтипов
+    window.updateSubtypes = function() {
+        const type = document.getElementById('objectType').value;
+        const selector = document.getElementById('subtypeSelector');
+        selector.innerHTML = "";
+        
+        const list = SUBTYPES[type] || SUBTYPES['default'];
+        list.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item;
+            opt.textContent = item;
+            selector.appendChild(opt);
+        });
+    };
+
+    // Обновление ползунка качества
+    window.updateQuality = function(val) {
+        val = parseInt(val);
+        const q = QUALITY_LEVELS[val];
+        const label = document.getElementById('qualityLabel');
+        const input = document.getElementById('quality');
+        const hiddenName = document.getElementById('qualityName');
+        
+        label.textContent = `${val} - ${q.name}`;
+        label.style.color = q.color;
+        hiddenName.value = q.name;
+        document.getElementById('qualityDesc').textContent = q.desc;
+        
+        const percentage = ((val - input.min) / (input.max - input.min)) * 100;
+        input.style.background = `linear-gradient(to right, var(--accent-primary) ${percentage}%, var(--bg-primary) ${percentage}%)`;
+    };
+
+    // Обновление ползунка редкости
+    window.updateRarity = function(val) {
+        val = parseInt(val);
+        const r = RARITY_LEVELS[val];
+        const label = document.getElementById('rarityLabel');
+        const input = document.getElementById('rarity');
+        const hiddenName = document.getElementById('rarityName');
+        
+        label.textContent = `${val} - ${r.name}`;
+        label.style.color = r.color;
+        hiddenName.value = r.name;
+        document.getElementById('rarityDesc').textContent = r.desc;
+        
+        const percentage = ((val - input.min) / (input.max - input.min)) * 100;
+        input.style.background = `linear-gradient(to right, var(--accent-primary) ${percentage}%, var(--bg-primary) ${percentage}%)`;
+    };
+
+    // ФУНКЦИЯ КОПИРОВАНИЯ В БУФЕР ОБМЕНА
+    window.copyToClipboard = function() {
+        const author = document.getElementById('authorName').value.trim() || "Аноним";
+        const components = document.getElementById('components').value.trim();
+        
+        if (!components) {
+            alert("Пожалуйста, заполните поле 'Компоненты', чтобы скопировать шаблон.");
+            document.getElementById('components').focus();
+            return;
+        }
+
+        const typeKey = document.getElementById('objectType').value;
+        const typeName = OBJECT_TYPES[typeKey].icon + " " + OBJECT_TYPES[typeKey].name;
+        const subtype = document.getElementById('subtypeSelector').value;
+        const language = document.getElementById('language').value;
+        const namingStyle = document.getElementById('namingStyle').options[document.getElementById('namingStyle').selectedIndex].text;
+        const wordCount = document.getElementById('wordCount').value;
+        const textStyle = document.getElementById('textStyle').options[document.getElementById('textStyle').selectedIndex].text;
+        
+        const qualityVal = document.getElementById('quality').value;
+        const qualityName = QUALITY_LEVELS[qualityVal].name;
+        
+        const rarityVal = document.getElementById('rarity').value;
+        const rarityName = RARITY_LEVELS[rarityVal].name;
+
+        // Получаем отмеченные блоки структуры
+        let selectedBlocks = [];
+        const checkboxes = document.querySelectorAll('.blocks-container input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            if (cb.checked) {
+                selectedBlocks.push(cb.parentElement.textContent.replace('★', '').trim());
+            }
+        });
+        const structureStr = selectedBlocks.join(', ');
+
+        const wishes = document.getElementById('wishes').value.trim() || "Отсутствуют";
+
+        // Формирование красивого Markdown текста
+        const formattedText = `🌌 **Предложение идеи для Генератора**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 **Автор:** ${author}
+🧪 **1. Компоненты:** [${components}]
+📦 **2. Тип:** ${typeName}
+🔸 **3. Подтип:** ${subtype}
+🌐 **4. Язык названия:** ${language}
+🔤 **5. Стиль имени:** ${namingStyle}
+📏 **6. Кол-во слов в имени:** ${wordCount}
+🎭 **7. Стиль описания:** ${textStyle}
+🛠 **8. Качество:** ${qualityVal}/10 (${qualityName})
+💎 **9. Редкость:** ${rarityVal}/10 (${rarityName})
+📋 **10. Необходимые блоки:** ${structureStr}
+💡 **11. Пожелания/Контекст:** ${wishes}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+        // Копирование в буфер
+        navigator.clipboard.writeText(formattedText).then(() => {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "✅ Скопировано!";
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2500);
+        }).catch(err => {
+            alert('Ошибка при копировании: ' + err);
+        });
+    };
+</script>
+
+</body>
+</html>
