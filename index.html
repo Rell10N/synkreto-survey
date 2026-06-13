@@ -333,42 +333,57 @@
         <p>Заполните форму ниже, чтобы поделиться своей задумкой. Вы можете отправить форму мне на почту или просто скопировать готовый текстовый шаблон для отправки в чат!</p>
     </div>
 
-<!-- ФОРМА ОТПРАВКИ ЧЕРЕЗ WEB3FORMS -->
+    <!-- ФОРМА ОТПРАВКИ ЧЕРЕЗ WEB3FORMS -->
     <form action="https://api.web3forms.com/submit" method="POST" id="surveyForm">
         
-        <!-- Скрытые настройки для Web3Forms -->
+        <!-- Скрытые технические параметры Web3Forms (их имена менять нельзя) -->
+        <!-- !!! ВСТАВЬТЕ СЮДА ВАШ КЛЮЧ ИЗ ПИСЬМА !!! -->
         <input type="hidden" name="access_key" value="5cabcca4-63f3-4746-b186-e661409e33e8">
         <input type="hidden" name="subject" value="Новая идея для Генератора Синкретосферы!">
-        <!-- У Web3Forms параметр редиректа называется redirect, а не _next -->
         <input type="hidden" name="redirect" value="https://rell10n.github.io/synkreto-survey/">
+        <input type="hidden" name="from_name" value="Синкретосфера Опросник">
+
+        <!-- КРАСИВЫЕ СКРЫТЫЕ ПОЛЯ ДЛЯ ОТПРАВКИ НА РУССКОМ ЯЗЫКЕ -->
+        <input type="hidden" name="👤 Автор идеи" id="web3_author">
+        <input type="hidden" name="🧪 1. Компоненты" id="web3_components">
+        <input type="hidden" name="📦 2. Тип объекта" id="web3_type">
+        <input type="hidden" name="🔸 3. Подтип" id="web3_subtype">
+        <input type="hidden" name="🌐 4. Язык названия" id="web3_lang">
+        <input type="hidden" name="🔤 5. Стиль имени" id="web3_naming">
+        <input type="hidden" name="📏 6. Кол-во слов в имени" id="web3_words">
+        <input type="hidden" name="🎭 7. Стиль описания" id="web3_text_style">
+        <input type="hidden" name="🛠 8. Качество (Состояние)" id="web3_quality">
+        <input type="hidden" name="💎 9. Редкость (Сила)" id="web3_rarity">
+        <input type="hidden" name="📋 10. Требуемые блоки (Структура)" id="web3_structure">
+        <input type="hidden" name="💡 11. Пожелания и контекст" id="web3_wishes">
+        
+        <!-- Единый мега-удобный блок для копирования из письма в один клик -->
+        <input type="hidden" name="📝 ГОТОВЫЙ ШАБЛОН ДЛЯ ВСТАВКИ В ГЕНЕРАТОР" id="web3_template">
 
         <div class="card">
+            <!-- У всех интерактивных полей убран атрибут "name", чтобы они не отправлялись в кашу на английском -->
             <!-- Автор идеи -->
             <div class="form-group">
                 <label class="input-label" for="authorName">👤 Ваше имя или никнейм</label>
-                <input type="text" id="authorName" name="Автор_Идеи" placeholder="Например: Wanderer_42" required autocomplete="off">
+                <input type="text" id="authorName" placeholder="Например: Wanderer_42" required autocomplete="off">
             </div>
 
             <!-- 1. Компоненты -->
             <div class="form-group">
                 <label class="input-label" for="components">🧪 1. Компоненты (Основа)</label>
                 <div class="input-desc">Введите через запятую ключевые слова, из которых будет создан объект</div>
-                <input type="text" id="components" name="1_Компоненты" placeholder="Например: Тень, Ртуть, Хрусталь, Палка" required autocomplete="off">
+                <input type="text" id="components" placeholder="Например: Тень, Ртуть, Хрусталь, Забвение" required autocomplete="off">
             </div>
 
             <!-- 2 & 3. Тип и Подтип (Связанные списки) -->
             <div class="grid-2">
                 <div class="form-group">
                     <label class="input-label" for="objectType">📦 2. Тип объекта</label>
-                    <select id="objectType" name="2_Тип_Объекта" onchange="updateSubtypes()">
-                        <!-- Опции генерируются автоматически из JS -->
-                    </select>
+                    <select id="objectType" onchange="updateSubtypes()"></select>
                 </div>
                 <div class="form-group">
                     <label class="input-label" for="subtypeSelector">🔸 3. Уточнение (Подтип)</label>
-                    <select id="subtypeSelector" name="3_Подтип">
-                        <!-- Опции обновляются автоматически -->
-                    </select>
+                    <select id="subtypeSelector"></select>
                 </div>
             </div>
 
@@ -376,7 +391,7 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label class="input-label" for="language">🌐 4. Язык названия</label>
-                    <select id="language" name="4_Язык_Названия">
+                    <select id="language">
                         <option value="Латынь" selected>Латынь</option>
                         <option value="Русский">Русский</option>
                         <option value="Английский">Английский</option>
@@ -391,7 +406,7 @@
                 </div>
                 <div class="form-group">
                     <label class="input-label" for="namingStyle">🔤 5. Стиль имени</label>
-                    <select id="namingStyle" name="5_Стиль_Имени">
+                    <select id="namingStyle">
                         <option value="blend" selected>🌪️ Полное слияние (Rosrox)</option>
                         <option value="compound">🔗 Составное (Rostrum-Ferox)</option>
                         <option value="separate">📄 Раздельное (Rostrum Ferox)</option>
@@ -403,7 +418,7 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label class="input-label" for="wordCount">📏 6. Кол-во слов в имени</label>
-                    <select id="wordCount" name="6_Колво_Слов_в_Имени">
+                    <select id="wordCount">
                         <option value="Автоматически" selected>⚡ Автоматически (ИИ решит сам)</option>
                         <option value="1">1 слово</option>
                         <option value="2">2 слова</option>
@@ -419,7 +434,7 @@
                 </div>
                 <div class="form-group">
                     <label class="input-label" for="textStyle">🎭 7. Стиль описания</label>
-                    <select id="textStyle" name="7_Стиль_Описания">
+                    <select id="textStyle">
                         <option value="literary" selected>📖 Художественный (Фэнтези)</option>
                         <option value="scientific">🔬 Научный (Академический)</option>
                         <option value="horror">🩸 Хоррор (Мрачный)</option>
@@ -438,9 +453,7 @@
                         <label style="color: var(--text-primary);">🛠 8. Качество (Состояние)</label>
                         <span id="qualityLabel" style="color: var(--text-secondary);">5 - Стандартное</span>
                     </div>
-                    <input type="range" id="quality" name="8_Качество_Значение" min="1" max="10" value="5" oninput="updateQuality(this.value)">
-                    <!-- Скрытые текстовые поля для отправки красивого значения на почту -->
-                    <input type="hidden" id="qualityName" name="8_Качество_Название" value="Стандартное">
+                    <input type="range" id="quality" min="1" max="10" value="5" oninput="updateQuality(this.value)">
                     <div id="qualityDesc" class="slider-desc">Базовая норма. Скучный реализм.</div>
                 </div>
             </div>
@@ -452,9 +465,7 @@
                         <label style="color: var(--text-primary);">💎 9. Редкость (Сила)</label>
                         <span id="rarityLabel" style="color: var(--text-secondary);">2 - Типичная</span>
                     </div>
-                    <input type="range" id="rarity" name="9_Редкость_Значение" min="1" max="10" value="2" oninput="updateRarity(this.value)">
-                    <!-- Скрытые текстовые поля для отправки красивого значения на почту -->
-                    <input type="hidden" id="rarityName" name="9_Редкость_Название" value="Типичная">
+                    <input type="range" id="rarity" min="1" max="10" value="2" oninput="updateRarity(this.value)">
                     <div id="rarityDesc" class="slider-desc">Знакомая всем, фон реальности.</div>
                 </div>
             </div>
@@ -465,16 +476,16 @@
                 <div class="input-desc">Укажите, что именно генератор должен расписать. Отмеченные ★ блоки — крайне рекомендуются!</div>
                 
                 <div class="blocks-container">
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Состав" value="Да" checked><span>1. Состав</span></label></div>
-                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Название" value="Да" checked><span>2. Название ★</span></label></div>
-                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Описание" value="Да" checked><span>3. Описание ★</span></label></div>
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Свойства" value="Да" checked><span>4. Свойства</span></label></div>
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Локация" value="Да" checked><span>5. Локация</span></label></div>
-                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Внешний_Вид" value="Да" checked><span>6. Внешность ★</span></label></div>
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Параметры" value="Да" checked><span>7. Параметры</span></label></div>
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Плюс_Минус" value="Да" checked><span>8. Плюс/Минус</span></label></div>
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Лор" value="Да" checked><span>9. Лор</span></label></div>
-                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" name="10_Структура_Акустика" value="Да" checked><span>10. Акустика</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>1. Состав</span></label></div>
+                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>2. Название ★</span></label></div>
+                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>3. Описание ★</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>4. Свойства</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>5. Локация</span></label></div>
+                    <div class="block-item recommended"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>6. Внешность ★</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>7. Параметры</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>8. Плюс/Минус</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>9. Лор</span></label></div>
+                    <div class="block-item"><label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" class="block-cb" checked><span>10. Акустика</span></label></div>
                 </div>
             </div>
 
@@ -482,7 +493,7 @@
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="input-label" for="wishes">💡 11. Ваши пожелания и предпочтения</label>
                 <div class="input-desc">Здесь можно указать контекст, привязку к фракции или другие важные детали</div>
-                <textarea id="wishes" name="11_Пожелания_и_Контекст" placeholder="Например: 'Хочу, чтобы этот предмет принадлежал древней гильдии' или 'Сделайте акцент на эффекте ртути'..."></textarea>
+                <textarea id="wishes" placeholder="Например: 'Хочу, чтобы этот предмет принадлежал древней гильдии' или 'Сделайте акцент на эффекте ртути'..."></textarea>
             </div>
         </div>
 
@@ -569,7 +580,6 @@
 
     // === ИНИЦИАЛИЗАЦИЯ И ОБРАБОТЧИКИ ===
     document.addEventListener('DOMContentLoaded', () => {
-        // Заполняем типы объектов
         const typeSelect = document.getElementById('objectType');
         for (let key in OBJECT_TYPES) {
             let opt = document.createElement('option');
@@ -578,13 +588,11 @@
             typeSelect.appendChild(opt);
         }
         
-        // Обновляем подтипы и значения ползунков по умолчанию
         updateSubtypes();
         updateQuality(5);
         updateRarity(2);
     });
 
-    // Функция обновления списка подтипов
     window.updateSubtypes = function() {
         const type = document.getElementById('objectType').value;
         const selector = document.getElementById('subtypeSelector');
@@ -599,57 +607,46 @@
         });
     };
 
-    // Обновление ползунка качества
     window.updateQuality = function(val) {
         val = parseInt(val);
         const q = QUALITY_LEVELS[val];
         const label = document.getElementById('qualityLabel');
         const input = document.getElementById('quality');
-        const hiddenName = document.getElementById('qualityName');
         
         label.textContent = `${val} - ${q.name}`;
         label.style.color = q.color;
-        hiddenName.value = q.name;
         document.getElementById('qualityDesc').textContent = q.desc;
         
         const percentage = ((val - input.min) / (input.max - input.min)) * 100;
         input.style.background = `linear-gradient(to right, var(--accent-primary) ${percentage}%, var(--bg-primary) ${percentage}%)`;
     };
 
-    // Обновление ползунка редкости
     window.updateRarity = function(val) {
         val = parseInt(val);
         const r = RARITY_LEVELS[val];
         const label = document.getElementById('rarityLabel');
         const input = document.getElementById('rarity');
-        const hiddenName = document.getElementById('rarityName');
         
         label.textContent = `${val} - ${r.name}`;
         label.style.color = r.color;
-        hiddenName.value = r.name;
         document.getElementById('rarityDesc').textContent = r.desc;
         
         const percentage = ((val - input.min) / (input.max - input.min)) * 100;
         input.style.background = `linear-gradient(to right, var(--accent-primary) ${percentage}%, var(--bg-primary) ${percentage}%)`;
     };
 
-    // ФУНКЦИЯ КОПИРОВАНИЯ В БУФЕР ОБМЕНА
-    window.copyToClipboard = function() {
+    // ГЕНЕРАТОР ШАБЛОНА ДЛЯ КОПИРОВАНИЯ И ОТПРАВКИ НА ПОЧТУ
+    function getFormattedMarkdown() {
         const author = document.getElementById('authorName').value.trim() || "Аноним";
-        const components = document.getElementById('components').value.trim();
+        const components = document.getElementById('components').value.trim() || "Не указаны";
         
-        if (!components) {
-            alert("Пожалуйста, заполните поле 'Компоненты', чтобы скопировать шаблон.");
-            document.getElementById('components').focus();
-            return;
-        }
-
-        const typeKey = document.getElementById('objectType').value;
-        const typeName = OBJECT_TYPES[typeKey].icon + " " + OBJECT_TYPES[typeKey].name;
+        const typeSelect = document.getElementById('objectType');
+        const typeName = OBJECT_TYPES[typeSelect.value].icon + " " + OBJECT_TYPES[typeSelect.value].name;
         const subtype = document.getElementById('subtypeSelector').value;
+        
         const language = document.getElementById('language').value;
         const namingStyle = document.getElementById('namingStyle').options[document.getElementById('namingStyle').selectedIndex].text;
-        const wordCount = document.getElementById('wordCount').value;
+        const wordCount = document.getElementById('wordCount').options[document.getElementById('wordCount').selectedIndex].text;
         const textStyle = document.getElementById('textStyle').options[document.getElementById('textStyle').selectedIndex].text;
         
         const qualityVal = document.getElementById('quality').value;
@@ -658,36 +655,47 @@
         const rarityVal = document.getElementById('rarity').value;
         const rarityName = RARITY_LEVELS[rarityVal].name;
 
-        // Получаем отмеченные блоки структуры
-        let selectedBlocks = [];
-        const checkboxes = document.querySelectorAll('.blocks-container input[type="checkbox"]');
-        checkboxes.forEach(cb => {
+        // Красивый сбор структуры блоков (с галочками ВКЛ и ВЫКЛ)
+        let structureList = [];
+        const checkboxes = document.querySelectorAll('.blocks-container .block-item');
+        checkboxes.forEach(item => {
+            const cb = item.querySelector('input[type="checkbox"]');
+            const labelText = item.querySelector('span').textContent.replace('★', '').trim();
             if (cb.checked) {
-                selectedBlocks.push(cb.parentElement.textContent.replace('★', '').trim());
+                structureList.push(`✅ [ВКЛЮЧЕН] ${labelText}`);
+            } else {
+                structureList.push(`❌ [ОТКЛЮЧЕН] ${labelText}`);
             }
         });
-        const structureStr = selectedBlocks.join(', ');
+        const structureStr = "\n" + structureList.map(s => "    " + s).join("\n");
 
         const wishes = document.getElementById('wishes').value.trim() || "Отсутствуют";
 
-        // Формирование красивого Markdown текста
-        const formattedText = `🌌 **Предложение идеи для Генератора**
-━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 **Автор:** ${author}
-🧪 **1. Компоненты:** [${components}]
-📦 **2. Тип:** ${typeName}
-🔸 **3. Подтип:** ${subtype}
-🌐 **4. Язык названия:** ${language}
-🔤 **5. Стиль имени:** ${namingStyle}
-📏 **6. Кол-во слов в имени:** ${wordCount}
-🎭 **7. Стиль описания:** ${textStyle}
-🛠 **8. Качество:** ${qualityVal}/10 (${qualityName})
-💎 **9. Редкость:** ${rarityVal}/10 (${rarityName})
-📋 **10. Необходимые блоки:** ${structureStr}
-💡 **11. Пожелания/Контекст:** ${wishes}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+        return `👤 Автор предложения: ${author}
+🧪 1. Компоненты: [${components}]
+📦 2. Тип объекта: ${typeName}
+🔸 3. Подтип: ${subtype}
+🌐 4. Язык названия: ${language}
+🔤 5. Стиль имени: ${namingStyle}
+📏 6. Кол-во слов: ${wordCount}
+🎭 7. Стиль описания: ${textStyle}
+🛠 8. Качество: ${qualityVal}/10 (${qualityName})
+💎 9. Редкость: ${rarityVal}/10 (${rarityName})
+📋 10. Структура блоков:${structureStr}
+💡 11. Пожелания и контекст: ${wishes}`;
+    }
 
-        // Копирование в буфер
+    // КНОПКА КОПИРОВАНИЯ В БУФЕР
+    window.copyToClipboard = function() {
+        const components = document.getElementById('components').value.trim();
+        if (!components) {
+            alert("Пожалуйста, заполните поле 'Компоненты', чтобы скопировать шаблон.");
+            document.getElementById('components').focus();
+            return;
+        }
+
+        const formattedText = "🌌 Идея для Генератора:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" + getFormattedMarkdown() + "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+
         navigator.clipboard.writeText(formattedText).then(() => {
             const btn = document.getElementById('copyBtn');
             const originalText = btn.innerHTML;
@@ -702,6 +710,53 @@
             alert('Ошибка при копировании: ' + err);
         });
     };
+
+    // ПЕРЕХВАТ И КРАСИВОЕ ФОРМИРОВАНИЕ ДАННЫХ ПЕРЕД ОТПРАВКОЙ НА ПОЧТУ ЧЕРЕЗ WEB3FORMS
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+        // Заполняем красивые русские скрытые поля из оригинального интерфейса
+        document.getElementById('web3_author').value = document.getElementById('authorName').value;
+        document.getElementById('web3_components').value = document.getElementById('components').value;
+        
+        const typeSelect = document.getElementById('objectType');
+        document.getElementById('web3_type').value = OBJECT_TYPES[typeSelect.value].icon + " " + OBJECT_TYPES[typeSelect.value].name;
+        document.getElementById('web3_subtype').value = document.getElementById('subtypeSelector').value;
+        
+        document.getElementById('web3_lang').value = document.getElementById('language').value;
+        
+        const namingSelect = document.getElementById('namingStyle');
+        document.getElementById('web3_naming').value = namingSelect.options[namingSelect.selectedIndex].text;
+        
+        const wordsSelect = document.getElementById('wordCount');
+        document.getElementById('web3_words').value = wordsSelect.options[wordsSelect.selectedIndex].text;
+        
+        const styleSelect = document.getElementById('textStyle');
+        document.getElementById('web3_text_style').value = styleSelect.options[styleSelect.selectedIndex].text;
+        
+        const qVal = document.getElementById('quality').value;
+        document.getElementById('web3_quality').value = `${qVal}/10 (${QUALITY_LEVELS[qVal].name})`;
+        
+        const rVal = document.getElementById('rarity').value;
+        document.getElementById('web3_rarity').value = `${rVal}/10 (${RARITY_LEVELS[rVal].name})`;
+        
+        document.getElementById('web3_wishes').value = document.getElementById('wishes').value || "Отсутствуют";
+        
+        // Переводим структуру в один наглядный список со всеми ✅ и ❌
+        let structureList = [];
+        const checkboxes = document.querySelectorAll('.blocks-container .block-item');
+        checkboxes.forEach(item => {
+            const cb = item.querySelector('input[type="checkbox"]');
+            const labelText = item.querySelector('span').textContent.replace('★', '').trim();
+            if (cb.checked) {
+                structureList.push(`✅ [ВКЛЮЧЕН] ${labelText}`);
+            } else {
+                structureList.push(`❌ [ОТКЛЮЧЕН] ${labelText}`);
+            }
+        });
+        document.getElementById('web3_structure').value = "\n" + structureList.join("\n");
+        
+        // Вставляем единый готовый Markdown блок
+        document.getElementById('web3_template').value = "\n" + getFormattedMarkdown();
+    });
 </script>
 
 </body>
