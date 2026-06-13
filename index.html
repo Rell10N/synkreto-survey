@@ -333,15 +333,14 @@
         <p>Заполните форму ниже, чтобы поделиться своей задумкой. Вы можете отправить форму мне на почту или просто скопировать готовый текстовый шаблон для отправки в чат!</p>
     </div>
 
-    <!-- ФОРМА ОТПРАВКИ -->
-    <form action="https://formsubmit.co/synkretossurvey@gmail.com" method="POST" id="surveyForm">
+<!-- ФОРМА ОТПРАВКИ ЧЕРЕЗ WEB3FORMS -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="surveyForm">
         
-        <!-- Скрытые настройки для FormSubmit (чтобы страница после отправки выглядела красиво) -->
-        <input type="hidden" name="_subject" value="Новая идея для Генератора Синкретосферы!">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-
-    <input type="hidden" name="_next" value="https://rell10n.github.io/synkreto-survey/">
+        <!-- Скрытые настройки для Web3Forms -->
+        <input type="hidden" name="access_key" value="5cabcca4-63f3-4746-b186-e661409e33e8">
+        <input type="hidden" name="subject" value="Новая идея для Генератора Синкретосферы!">
+        <!-- У Web3Forms параметр редиректа называется redirect, а не _next -->
+        <input type="hidden" name="redirect" value="https://rell10n.github.io/synkreto-survey/">
 
         <div class="card">
             <!-- Автор идеи -->
